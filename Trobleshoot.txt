@@ -1,0 +1,50 @@
+Let's check if Tailwind CSS is properly installed and configured. Run these commands in sequence:
+
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+
+This will install the necessary dependencies and create both configuration files.
+
+Let's check your project's dependencies. First, let's see what's installed:
+npm list tailwindcss postcss autoprefixer
+
+Now let's check your PostCSS configuration:
+
+cat postcss.config.js
+module.exports = {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  }%
+Let's check your Vite configuration since you're using Vite:
+
+cat vite.config.ts
+
+todopro % cat vite.config.ts
+The issue is that Vite needs to be configured to use PostCSS. Let's update your vite.config.ts:
+export default defineConfig({
+  plugins: [react()],
+  css: {
+    postcss: './postcss.config.js'
+ }
+})
+
+Now restart your development server:
+
+Apply to vite.config....
+Run
+
+If your project is using ES modules (indicated by "type": "module" in package.json) but the PostCSS config is using CommonJS syntax. Let's fix this by renaming and updating the PostCSS config file:
+First, let's rename the file to use the .cjs extension:
+The error is occurring because your project is using ES modules (indicated by "type": "module" in package.json) but the PostCSS config is using CommonJS syntax. Let's fix this by renaming and updating the PostCSS config file:
+First, let's rename the file to use the .cjs extension:
+
+% mv postcss.config.js postcss.config.cjs                         mv postcss.config.js postcss.config.cjs
+Now let's update the Vite config to point to the new file:
+
+export default defineConfig({
+  plugins: [react()],
+  css: {
+    postcss: './postcss.config.cjs'
+  }
